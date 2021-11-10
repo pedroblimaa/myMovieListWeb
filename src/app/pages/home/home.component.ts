@@ -7,11 +7,8 @@ import { Movie } from '../../models/movie.module'
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   movies: Movie[] = []
 
   constructor(private service: MovieService) {}
-
-  ngOnInit(): void {
-  }
 }

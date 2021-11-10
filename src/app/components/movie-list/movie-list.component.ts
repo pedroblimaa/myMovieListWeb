@@ -7,7 +7,7 @@ import { MovieService } from '../../services/movie.service'
   templateUrl: './movie-list.component.html',
   styleUrls: ['./movie-list.component.scss'],
 })
-export class MovieListComponent implements OnInit {
+export class MovieListComponent {
   movies: Movie[] = []
   dataContent: any = {}
   loading: boolean = true
@@ -28,6 +28,4 @@ export class MovieListComponent implements OnInit {
   nextPage() {
     //next page
   }
-
-  ngOnInit(): void {}
 }

@@ -1,5 +1,4 @@
 import { MovieService } from './../../services/movie.service'
-import { MovieListComponent } from './../../components/movie-list/movie-list.component'
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { Movie } from 'src/app/models/movie.module'
 
