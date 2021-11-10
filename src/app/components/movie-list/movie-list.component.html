@@ -1,9 +1,7 @@
 <div>
   <div class="list" *ngIf="!loading; else isLoading">
     <div *ngFor="let movie of movies" class="movie-card">
-      <!-- <div class="movie-card-image">
-      <img [src]="movie.image" alt="movie-image">
-    </div> -->
+      <!-- implement images -->
       <div class="card-content">
         <h2 class="movie-info">{{ movie.name }}</h2>
         <p class="movie-info">Year: {{ movie.release_date }}</p>
@@ -11,7 +9,6 @@
         <p class="movie-info">Rating: {{ movie.vote_average }}</p>
       </div>
     </div>
-    <!-- Pagination -->
   </div>
   <div class="pagination">
     <button

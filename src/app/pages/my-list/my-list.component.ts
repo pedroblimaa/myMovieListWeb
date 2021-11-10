@@ -19,9 +19,7 @@ export class MyListComponent implements OnInit {
 
     this.service.getMyList(order).subscribe({
       next: (data) => {
-        this.dataContent = data
-        this.movies = this.dataContent.content
-        this.loading = false
+        this.setMovies(data)
       },
       error: (err) => {
         console.log(err)
@@ -32,13 +30,17 @@ export class MyListComponent implements OnInit {
   ngOnInit(): void {
     this.service.getMyList('release_date,asc').subscribe({
       next: (data) => {
-        this.dataContent = data
-        this.movies = this.dataContent.content
-        this.loading = false
+        this.setMovies(data)
       },
       error: (err) => {
         console.log(err)
       },
     })
+  }
+
+  setMovies(data: any) {
+    this.dataContent = data
+    this.movies = this.dataContent.content
+    this.loading = false
   }
 }
