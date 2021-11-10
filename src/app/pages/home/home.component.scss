@@ -1,0 +1,19 @@
+div{
+  color: #fff;
+}
+
+div a{
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+div li{
+  list-style: none;
+}
+
+.home-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

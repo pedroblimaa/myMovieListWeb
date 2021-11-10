@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>List of movies</h1>
+  <!-- Select to order the movies -->
+  <div class="order-container">
+    <label for="order">Order by:</label>
+    <select
+      class="form-control select"
+      #t
+      (change)="orderBy(t.value)"
+      id="order"
+      name="order"
+    >
+      <option selected="selected" value="release_date,asc">
+        Year: Low to High
+      </option>
+      <option value="release_date,desc">Year: High to Low</option>
+      <option value="name">Title</option>
+      <option value="vote_average">Rating</option>
+      <option value="language">Language</option>
+    </select>
+  </div>
+
+  <div class="movies-container">
+    <app-movie-list
+      [movieData]="{dataContent, movies, loading}"
+    ></app-movie-list>
+  </div>
+</div>

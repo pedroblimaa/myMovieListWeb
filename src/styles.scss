@@ -1,1 +1,23 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #56a9ff;
+  --secondary-color: #71b5fd;
+  --background-color: #202124;
+  --light-background-color: #303134;
+  --light-color: #ededed;
+  --danger-color: #ff5252;
+}
+
+* {
+  font-family: "Lato", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  padding: 30px;
+  margin: 0 auto;
+}
+
+body {
+  background-color: var(--background-color);
+}

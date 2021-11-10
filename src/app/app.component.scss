@@ -1,0 +1,33 @@
+header {
+  background-color: var(--light-background-color);
+  padding: 20px;
+}
+
+header a {
+  color: var(--primary-color);
+  text-decoration: none;
+
+}
+
+.app-title {
+  font-size: 25px;
+}
+
+.ativo {
+  display: none;
+}
+
+.navigate-list{
+  float: right;
+  padding: 0px 20px;
+  transform: translateY(10%);
+}
+
+.navigate-list a{
+  font-size: 18px;
+  padding: 0 10px;
+}
+
+.clickable{
+  cursor: pointer;
+}
