@@ -1,11 +1,10 @@
 import { AuthService } from '../../services/auth.service'
-import { HttpClient } from '@angular/common/http'
 import { Component, OnInit } from '@angular/core'
 
 @Component({
-  selector: 'app-Login',
-  templateUrl: './Login.component.html',
-  styleUrls: ['./Login.component.scss'],
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
   email: string = ''
@@ -24,13 +23,14 @@ export class LoginComponent implements OnInit {
 
     this.authService.authenticate(formLogin).subscribe({
       next: (data) => {
-        console.log(data)
         this.authService.setToken(data.token)
         this.authService.redirectIfAuthenticated()
       },
       error: (err) => {
-        console.log(err)
-        this.errorMessage = 'Wrong email or password'
+        console.log(err.status)
+        if (err.status === 400) {
+          this.errorMessage = 'Wrong email or password'
+        }
       },
     })
   }

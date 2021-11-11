@@ -12,9 +12,13 @@ export class MovieService {
   constructor(private httpClient: HttpClient) {}
 
   getMyList(order: string): Observable<Movie[]> {
-    console.log(this.headers)
+    return this.httpClient.get<Movie[]>('http://localhost:8081/movie-list?sort=' + order, {
+      headers: this.headers,
+    })
+  }
 
-    return this.httpClient.get<Movie[]>('http://localhost:8081/movie-list?sort=' +  order , {
+  getListByUser(userId: string, order: string): Observable<Movie[]> {
+    return this.httpClient.get<Movie[]>('http://localhost:8081/movie-list/user?id=' + userId + '&sort=' + order, {
       headers: this.headers,
     })
   }

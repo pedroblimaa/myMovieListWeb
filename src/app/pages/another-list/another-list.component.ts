@@ -1,38 +1,36 @@
 import { MovieService } from './../../services/movie.service'
-import { Component, OnInit, ViewChild } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { Movie } from 'src/app/models/movie.module'
 
 @Component({
-  selector: 'app-my-list',
-  templateUrl: './my-list.component.html',
-  styleUrls: ['./my-list.component.scss'],
+  selector: 'app-another-list',
+  templateUrl: './another-list.component.html',
+  styleUrls: ['./another-list.component.scss'],
 })
-export class MyListComponent implements OnInit {
+export class AnotherListComponent {
   movies: Movie[] = []
   dataContent: any = {}
-  loading: boolean = true
+  loading: boolean = false
+  userId: string = ''
   errorMessage: string = ''
 
   constructor(private service: MovieService) {}
 
-  getMovies(order: any = 'release_date,asc') {
-    this.service.getMyList(order).subscribe({
+  searchUserList(order: any = 'release_date,asc'): void {
+    this.loading = true
+
+    this.service.getListByUser(this.userId, order).subscribe({
       next: (data) => {
+        this.errorMessage = ''
         this.setMovies(data)
       },
       error: (err) => {
-
-        if(err.status === 404) {
+        console.log(err)
+        if (err.status === 404) {
           this.errorMessage = 'User not found'
         }
-
-        console.log(err)
       },
     })
-  }
-
-  ngOnInit(): void {
-    this.getMovies()
   }
 
   setMovies(data: any) {

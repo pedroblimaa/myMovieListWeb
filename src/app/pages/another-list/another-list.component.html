@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>List of movies</h1>
+  <form class="search-form" (submit)="searchUserList()">
+    <input class="form-control" type="text" name="userId" [(ngModel)]="userId" placeholder="Enter user id" />
+    <button class="primary-btn" type="submit">Get movies</button>
+  </form>
+
+  <div class="order-container">
+    <label for="order">Order by:</label>
+    <select class="form-control select" #t (change)="searchUserList(t.value)" id="order" name="order">
+      <option selected="selected" value="release_date,asc">Year: Low to High</option>
+      <option value="release_date,desc">Year: High to Low</option>
+      <option value="name">Title</option>
+      <option value="vote_average">Rating</option>
+      <option value="language">Language</option>
+    </select>
+  </div>
+
+  <div class="movies-container">
+    <div *ngIf="errorMessage.length <= 0; else errorDiv"></div>
+    <app-movie-list [movieData]="{dataContent, movies, loading}"></app-movie-list>
+  </div>
+
+  <ng-template #errorDiv>
+    <h2 class="error-title">{{ errorMessage }}</h2>
+  </ng-template>
+</div>

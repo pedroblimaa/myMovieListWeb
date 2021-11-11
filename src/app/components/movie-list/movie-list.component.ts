@@ -18,7 +18,10 @@ export class MovieListComponent {
     this.movies = model.movies
     this.dataContent = model.dataContent
     this.loading = model.loading
-    console.log(this.dataContent)
+  }
+
+  objectIsEmpty(dataContent: any){
+    return Object.keys(dataContent).length === 0
   }
 
   previousPage() {

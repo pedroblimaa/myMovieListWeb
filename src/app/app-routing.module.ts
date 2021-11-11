@@ -1,15 +1,22 @@
+import { AnotherListComponent } from './pages/another-list/another-list.component';
 import { MyListComponent } from './pages/my-list/my-list.component'
 import { GuardService } from './services/guard.service'
 import { HomeComponent } from './pages/home/home.component'
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
-import { LoginComponent } from './pages/Login/Login.component'
+import { LoginComponent } from './pages/login/login.component'
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: 'my-list',
     component: MyListComponent,
+    data: { requiresLogin: true },
+    canActivate: [GuardService],
+  },
+  {
+    path: 'my-list/user',
+    component: AnotherListComponent,
     data: { requiresLogin: true },
     canActivate: [GuardService],
   },

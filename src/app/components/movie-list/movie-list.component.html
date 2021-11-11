@@ -1,37 +1,41 @@
 <div>
-  <div class="list" *ngIf="!loading; else isLoading">
-    <div *ngFor="let movie of movies" class="movie-card">
-      <!-- implement images -->
-      <div class="card-content">
-        <h2 class="movie-info">{{ movie.name }}</h2>
-        <p class="movie-info">Year: {{ movie.release_date }}</p>
-        <p class="movie-info">Language: {{ movie.language }}</p>
-        <p class="movie-info">Rating: {{ movie.vote_average }}</p>
+  <div *ngIf="!objectIsEmpty(dataContent)">
+    <div *ngIf="!dataContent?.empty; else emptyList">
+      <div class="list" *ngIf="!loading; else isLoading">
+        <div *ngFor="let movie of movies" class="movie-card">
+          <!-- implement images -->
+          <div class="card-content">
+            <h2 class="movie-info">{{ movie.name }}</h2>
+            <p class="movie-info">Year: {{ movie.release_date }}</p>
+            <p class="movie-info">Language: {{ movie.language }}</p>
+            <p class="movie-info">Rating: {{ movie.vote_average }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="pagination">
+        <button class="btn pagination-btn" (click)="previousPage()" [disabled]="dataContent.pageable?.pageNumber <= 0">
+          Previous
+        </button>
+        <span
+          >Page {{ dataContent?.pageable?.pageNumber + 1 }} /
+          {{ dataContent.totalPages }}
+        </span>
+        <button
+          class="btn pagination-btn"
+          (click)="nextPage()"
+          [disabled]="dataContent?.pageable?.pageNumber + 1 >= dataContent?.totalPages"
+        >
+          Next
+        </button>
       </div>
     </div>
-  </div>
-  <div class="pagination">
-    <button
-      class="btn pagination-btn"
-      (click)="previousPage()"
-      [disabled]="dataContent.pageable.pageNumber <= 0"
-    >
-      Previous
-    </button>
-    <span
-      >Page {{ dataContent.pageable.pageNumber + 1 }} /
-      {{ dataContent.totalPages }}
-    </span>
-    <button
-      class="btn pagination-btn"
-      (click)="nextPage()"
-      [disabled]="dataContent.pageable.pageNumber + 1 >= dataContent.totalPages"
-    >
-      Next
-    </button>
   </div>
 
   <ng-template #isLoading>
     <app-loader></app-loader>
+  </ng-template>
+
+  <ng-template #emptyList>
+    <h2 class="error-title">The list has no movies</h2>
   </ng-template>
 </div>

@@ -1,7 +1,8 @@
 <header *ngIf="isLogged()">
   <a class="app-title" routerLink="">My Movie list</a>
   <div class="navigate-list">
-    <a *ngIf="isLogged()" routerLink="my-list" routerLinkActive="ativo">My List</a>
+    <a routerLink="my-list/user" routerLinkActive="ativo">Search List</a>
+    <a *ngIf="isLogged()" routerLink="my-list/" routerLinkActive="ativo" [routerLinkActiveOptions]="{exact: true}">My List</a>
     <a *ngIf="false" routerLink="login" routerLinkActive="ativo">Login</a>
     <a class="clickable" *ngIf="isLogged()" (click)="logout()">Logout</a>
   </div>
