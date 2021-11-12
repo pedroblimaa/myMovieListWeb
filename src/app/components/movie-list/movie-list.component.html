@@ -13,11 +13,14 @@
               ></fa-icon>
             </div>
             <div *ngIf="type === 'remove'" class="remove-icon">
-              <fa-icon
-                class="card-icon"
-                [icon]="faMinusCircle"
-                (click)="openModal({ movieId: movie.id, add: false })"
-              ></fa-icon>
+              <div>
+                <fa-icon
+                  class="card-icon"
+                  [icon]="faMinusCircle"
+                  (click)="openModal({ movieId: movie.id, add: false })"
+                ></fa-icon>
+                <fa-icon class="card-icon" [icon]="faEdit" (click)="openEditModal(movie.id)"></fa-icon>
+              </div>
             </div>
             <h2 class="movie-info">{{ movie.name }}</h2>
             <p class="movie-info">Year: {{ movie.release_date }}</p>
@@ -56,7 +59,11 @@
 
   <app-modal
     (emiter)="modalEvent($event)"
-    [modalData]="{ title: 'Do you really wanna delete this movie?', visible: modalData.visible, text: modalData.text}"
+    [modalData]="{ visible: modalData.visible, text: modalData.text, type: 'confirm' }"
+  ></app-modal>
+  <app-modal
+    (emiter)="editRating($event)"
+    [modalData]="{ visible: modalEditData.visible, text: 'Save', type: 'edit' }"
   ></app-modal>
   <app-modal-info
     (closeModal)="modalInfo.visible = false"

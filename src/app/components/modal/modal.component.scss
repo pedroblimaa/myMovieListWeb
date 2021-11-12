@@ -29,8 +29,16 @@
 }
 
 .buttons button{
-  width: 95%;
   padding: 10px;
+
+  &:first-child{
+    border-radius: 5px 0px 0px 5px;
+  }
+
+  &:last-child{
+    border-radius: 0px 5px 5px 0px;
+  }
+
 }
 
 .danger-btn{
@@ -53,4 +61,10 @@
 
 body.modal-open{
   overflow: hidden;
+}
+
+.disabled{
+  color: #ccc;
+  background-color: #eee;
+  cursor: not-allowed;
 }

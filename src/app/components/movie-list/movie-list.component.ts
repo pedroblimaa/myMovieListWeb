@@ -4,6 +4,7 @@ import { Movie } from '../../models/movie.module'
 import { MovieService } from '../../services/movie.service'
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons'
 import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-movie-list',
@@ -13,6 +14,7 @@ import { faMinusCircle } from '@fortawesome/free-solid-svg-icons'
 export class MovieListComponent {
   faPlusCircle = faPlusCircle
   faMinusCircle = faMinusCircle
+  faEdit = faEdit
 
   movies: Movie[] = []
   moviesApi: MovieApi[] = []
@@ -26,6 +28,10 @@ export class MovieListComponent {
     movieId: 0,
     add: false,
     text: '',
+  }
+  modalEditData: any = {
+    visible: false,
+    movieId: 0,
   }
   modalInfo: any = {
     visible: false,
@@ -89,15 +95,43 @@ export class MovieListComponent {
   openModal(data: any) {
     this.modalData.visible = true
     this.modalData.movieId = data.movieId
-    this.modalData.add = data.add
+    this.modalData.add = data.add ?? false
     this.modalData.text = data.add ? 'Add' : 'Remove'
   }
 
-  modalEvent(doAction: any) {
+  openEditModal(movieId: any) {
+    this.modalEditData.visible = true
+    this.modalEditData.movieId = movieId
+    console.log(movieId)
+  }
+
+  modalEvent({ doAction }: any) {
     this.modalData.visible = false
     if (doAction) {
       this.modalData.add ? this.addMovie(this.modalData.movieId) : this.removeMovie(this.modalData.movieId)
     }
+  }
+
+  editRating({ rating, doAction }: any) {
+    this.modalEditData.visible = false
+
+    if (doAction === false) {
+      return
+    }
+
+    this.service.editRating(this.modalEditData.movieId, rating).subscribe({
+      next: (data: any) => {
+        this.setModalInfo('Rating updated successfully', 'success')
+        this.movies = this.movies.map((movie) =>
+          movie.id == this.modalEditData.movieId ? { ...movie, vote_average: rating } : movie
+        )
+        console.log(data)
+      },
+      error: (err: any) => {
+        this.setModalInfo('Error updating rating', 'error')
+        console.log(err)
+      },
+    })
   }
 
   //Modal Info

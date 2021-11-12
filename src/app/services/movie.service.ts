@@ -51,4 +51,11 @@ export class MovieService {
       },
     })
   }
+
+  editRating(movieId: string | undefined, rating: number): Observable<Movie> {
+    return this.httpClient.patch<Movie>('http://localhost:8081/movie-list/vote', {
+      movieId: movieId,
+      vote: rating,
+    }, {headers: this.headers})
+  }
 }
