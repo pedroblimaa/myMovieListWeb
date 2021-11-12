@@ -1,8 +1,8 @@
 <div *ngIf="visible" class="modal-background">
   <div class="modal-card">
-    <h1>{{ title }}</h1>
+    <h1>Do you really wanna {{ text }} this movie?</h1>
     <div class="buttons">
-      <button class="primary-btn" (click)="close(true)">Delete</button>
+      <button class="primary-btn" (click)="close(true)">{{ text }}</button>
       <button class="primary-btn danger-btn" (click)="close(false)">Cancel</button>
     </div>
 </div>

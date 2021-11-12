@@ -25,13 +25,13 @@ export class MovieListComponent {
     visible: false,
     movieId: 0,
     add: false,
+    text: '',
   }
   modalInfo: any = {
     visible: false,
     message: '',
-    type: ''
+    type: '',
   }
-
 
   constructor(private service: MovieService) {}
 
@@ -62,19 +62,35 @@ export class MovieListComponent {
   addMovie(movieId: string | undefined) {
     this.service.addMovie(movieId).subscribe({
       next: (data: any) => {
-        console.log('adicionado com sucesso')
+        this.setModalInfo('Added successfully ', 'success')
         console.log(data)
       },
       error: (err: any) => {
+        console.log(err)
+        this.setModalInfo(err.status === 400 ? 'Movie already in the list' : 'Error adding', 'error')
+      },
+    })
+  }
+
+  removeMovie(movieId: string | undefined) {
+    this.service.removeMovie(movieId).subscribe({
+      next: (data: any) => {
+        this.setModalInfo('Removed successfully', 'success')
+        this.movies = this.movies.filter((movie) => movie.id !== movieId)
+      },
+      error: (err: any) => {
+        this.setModalInfo('Error removing', 'error')
         console.log(err)
       },
     })
   }
 
+  //Modal to add or remove a movie
   openModal(data: any) {
     this.modalData.visible = true
     this.modalData.movieId = data.movieId
     this.modalData.add = data.add
+    this.modalData.text = data.add ? 'Add' : 'Remove'
   }
 
   modalEvent(doAction: any) {
@@ -84,15 +100,10 @@ export class MovieListComponent {
     }
   }
 
-  removeMovie(movieId: string | undefined) {
-    this.service.removeMovie(movieId).subscribe({
-      next: (data: any) => {
-        console.log('removido com sucesso')
-        this.movies = this.movies.filter((movie) => movie.id !== movieId)
-      },
-      error: (err: any) => {
-        console.log(err)
-      },
-    })
+  //Modal Info
+  setModalInfo(message: string, type: string) {
+    this.modalInfo.visible = true
+    this.modalInfo.message = message
+    this.modalInfo.type = type
   }
 }

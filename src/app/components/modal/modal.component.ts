@@ -7,13 +7,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 })
 export class ModalComponent implements OnInit {
   visible: boolean = false
-  title: string = 'Do you really wanna do this?'
+  text: string = 'add'
 
   constructor() {}
 
   @Input() set modalData(data: any) {
     this.visible = data.visible
-    this.title = data.title
+    this.text = data.text
 
     if (this.visible) {
       document.getElementsByTagName('body')[0].classList.add('modal-open')

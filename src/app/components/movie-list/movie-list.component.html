@@ -56,7 +56,10 @@
 
   <app-modal
     (emiter)="modalEvent($event)"
-    [modalData]="{ title: 'Do you really wanna delete this movie?', visible: modalData.visible }"
+    [modalData]="{ title: 'Do you really wanna delete this movie?', visible: modalData.visible, text: modalData.text}"
   ></app-modal>
-  <app-modal-info [infoData]="{ message: 'Essa é uma mensagem', visible: true, type: 'info' }"></app-modal-info>
+  <app-modal-info
+    (closeModal)="modalInfo.visible = false"
+    [infoData]="{ message: modalInfo.message, visible: modalInfo.visible, type: modalInfo.type }"
+  ></app-modal-info>
 </div>

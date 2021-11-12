@@ -16,15 +16,15 @@ export class ModalInfoComponent implements OnInit {
   @Input() set infoData(data: any) {
     this.message = data.message
     this.type = data.type
-    this.visible = true
+    this.visible = data.visible
 
     if (this.visible) {
       setTimeout(() => {
         this.startTransition = true
-        this.close()
       }, 3000)
 
       setTimeout(() => {
+        this.close()
         this.visible = false
         this.startTransition = false
       }, 4000)
