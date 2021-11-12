@@ -12,13 +12,22 @@ export class MyListComponent implements OnInit {
   dataContent: any = {}
   loading: boolean = true
   errorMessage: string = ''
+  page: number = 0
 
   constructor(private service: MovieService) {}
 
+  changePage(event: { next: any }){
+
+    this.page = event.next ? this.page + 1 : this.page - 1
+    this.getMovies()
+  }
+
   getMovies(order: any = 'release_date,asc') {
-    this.service.getMyList(order).subscribe({
+    this.loading = true
+    this.service.getMyList(order, this.page).subscribe({
       next: (data) => {
         this.setMovies(data)
+        this.loading = false
       },
       error: (err) => {
 

@@ -5,6 +5,20 @@
         <div *ngFor="let movie of movies" class="movie-card">
           <!-- implement images -->
           <div class="card-content">
+            <div *ngIf="type === 'add'" class="add-icon">
+              <fa-icon
+                class="card-icon"
+                [icon]="faPlusCircle"
+                (click)="openModal({ movieId: movie.id, add: true })"
+              ></fa-icon>
+            </div>
+            <div *ngIf="type === 'remove'" class="remove-icon">
+              <fa-icon
+                class="card-icon"
+                [icon]="faMinusCircle"
+                (click)="openModal({ movieId: movie.id, add: false })"
+              ></fa-icon>
+            </div>
             <h2 class="movie-info">{{ movie.name }}</h2>
             <p class="movie-info">Year: {{ movie.release_date }}</p>
             <p class="movie-info">Language: {{ movie.language }}</p>
@@ -17,8 +31,9 @@
           Previous
         </button>
         <span
-          >Page {{ dataContent?.pageable?.pageNumber + 1 }} /
-          {{ dataContent.totalPages }}
+          >Page {{ dataContent?.pageable?.pageNumber + 1 }}
+          <span *ngIf="pageTotal; else pageUnknown"> /{{ dataContent.totalPages }} </span>
+          <ng-template #pageUnknown> / ... </ng-template>
         </span>
         <button
           class="btn pagination-btn"
@@ -38,4 +53,10 @@
   <ng-template #emptyList>
     <h2 class="error-title">The list has no movies</h2>
   </ng-template>
+
+  <app-modal
+    (emiter)="modalEvent($event)"
+    [modalData]="{ title: 'Do you really wanna delete this movie?', visible: modalData.visible }"
+  ></app-modal>
+  <app-modal-info [infoData]="{ message: 'Essa é uma mensagem', visible: true, type: 'info' }"></app-modal-info>
 </div>

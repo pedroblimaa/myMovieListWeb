@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>List of movies</h1>
+  <form class="search-form" (submit)="searchMovies()">
+    <input class="form-control" type="text" name="userId" [(ngModel)]="movieName" placeholder="Enter user name" />
+    <button class="primary-btn" type="submit">Search movies</button>
+  </form>
+
+  <div class="movies-container">
+    <app-movie-list (emitor)="changePage($event)"  [movieData]="{dataContent, movies, loading, type: 'add', pageTotal: false}"></app-movie-list>
+  </div>
+</div>

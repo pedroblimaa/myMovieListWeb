@@ -1,5 +1,5 @@
 import { MovieService } from './../../services/movie.service'
-import { Component, OnInit } from '@angular/core'
+import { Component } from '@angular/core'
 import { Movie } from 'src/app/models/movie.module'
 
 @Component({
@@ -13,13 +13,20 @@ export class AnotherListComponent {
   loading: boolean = false
   userId: string = ''
   errorMessage: string = ''
+  page: number = 0
 
   constructor(private service: MovieService) {}
+
+  changePage(event: { next: any }){
+
+    this.page = event.next ? this.page + 1 : this.page - 1
+    this.searchUserList()
+  }
 
   searchUserList(order: any = 'release_date,asc'): void {
     this.loading = true
 
-    this.service.getListByUser(this.userId, order).subscribe({
+    this.service.getListByUser(this.userId, order, this.page).subscribe({
       next: (data) => {
         this.errorMessage = ''
         this.setMovies(data)

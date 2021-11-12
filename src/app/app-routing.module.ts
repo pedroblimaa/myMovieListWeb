@@ -1,3 +1,4 @@
+import { AddMovieComponent } from './pages/add-movie/add-movie.component';
 import { AnotherListComponent } from './pages/another-list/another-list.component';
 import { MyListComponent } from './pages/my-list/my-list.component'
 import { GuardService } from './services/guard.service'
@@ -11,6 +12,12 @@ const routes: Routes = [
   {
     path: 'my-list',
     component: MyListComponent,
+    data: { requiresLogin: true },
+    canActivate: [GuardService],
+  },
+  {
+    path: 'my-list/add-movie',
+    component: AddMovieComponent,
     data: { requiresLogin: true },
     canActivate: [GuardService],
   },

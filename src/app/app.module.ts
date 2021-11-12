@@ -11,10 +11,15 @@ import { MyListComponent } from './pages/my-list/my-list.component'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import { MovieListComponent } from './components/movie-list/movie-list.component'
 import { LoaderComponent } from './components/loader/loader.component';
-import { AnotherListComponent } from './pages/another-list/another-list.component'
+import { AnotherListComponent } from './pages/another-list/another-list.component';
+import { AddMovieComponent } from './pages/add-movie/add-movie.component';
+import { ModalComponent } from './components/modal/modal.component';
+import { InfoModalComponent } from './components/loader/info-modal/info-modal.component';
+import { ModalInfoComponent } from './components/modal-info/modal-info.component'
+
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, HomeComponent, MyListComponent, MovieListComponent, LoaderComponent, AnotherListComponent],
+  declarations: [AppComponent, LoginComponent, HomeComponent, MyListComponent, MovieListComponent, LoaderComponent, AnotherListComponent, AddMovieComponent, ModalComponent, InfoModalComponent, ModalInfoComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, FontAwesomeModule],
   providers: [],
   bootstrap: [AppComponent],

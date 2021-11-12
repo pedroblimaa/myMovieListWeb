@@ -6,7 +6,6 @@ header {
 header a {
   color: var(--primary-color);
   text-decoration: none;
-
 }
 
 .app-title {
@@ -17,17 +16,63 @@ header a {
   display: none;
 }
 
-.navigate-list{
+.navigate-list {
   float: right;
   padding: 0px 20px;
   transform: translateY(10%);
 }
 
-.navigate-list a{
+.navigate-list a {
   font-size: 18px;
   padding: 0 10px;
 }
 
-.clickable{
+.clickable {
   cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropbtn {
+  background-color: var(--light-background-color);
+  color: var(--primary-color);
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  background-color: var(--light-background-color);
+  padding: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.8);
+  border: 1px solid var(--primary-color);
+  min-width: 160px;
+  text-align: center;
+  border-radius: 5px;
+  transform: translateX(-19%);
+
+  & a {
+    color: var(--primary-color);
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+    transition: all 0.1s;
+    border-radius: 5px;
+  }
+
+  & a:hover {
+    background-color: var(--primary-color);
+    color: white;
+  }
+}
+
+.dropdown:hover .dropdown-content {
+  display: table;
 }

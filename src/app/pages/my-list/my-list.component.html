@@ -22,7 +22,8 @@
 
   <div class="movies-container">
     <app-movie-list
-      [movieData]="{dataContent, movies, loading}"
+      (emitor)="changePage($event)"
+      [movieData]="{dataContent, movies, loading, type: 'remove'}"
     ></app-movie-list>
   </div>
 </div>

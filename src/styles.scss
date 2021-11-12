@@ -11,7 +11,17 @@
   font-family: "Lato", sans-serif;
   margin: 0;
   padding: 0;
+  color: #fff;
 }
+
+button,
+input,
+select,
+textarea,
+option {
+  color: #000;
+}
+
 
 .container {
   padding: 30px;
@@ -20,4 +30,28 @@
 
 body {
   background-color: var(--background-color);
+}
+
+h1,
+h3 {
+  text-align: center;
+}
+
+.primary-btn{
+  width: 100%;
+  border-radius: 4px;
+  border: 2px solid;
+  background-color: var(--primary-color);
+  color: #fff;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 5 10px;
+  outline: none;
+  border: 0;
+  cursor: pointer;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: var(--secondary-color);
+  }
 }
