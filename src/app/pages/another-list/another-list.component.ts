@@ -11,7 +11,7 @@ export class AnotherListComponent {
   movies: Movie[] = []
   dataContent: any = {}
   loading: boolean = false
-  userId: string = ''
+  userEmail: string = ''
   errorMessage: string = ''
   page: number = 0
 
@@ -26,7 +26,7 @@ export class AnotherListComponent {
   searchUserList(order: any = 'release_date,asc'): void {
     this.loading = true
 
-    this.service.getListByUser(this.userId, order, this.page).subscribe({
+    this.service.getListByUser(this.userEmail, order, this.page).subscribe({
       next: (data) => {
         this.errorMessage = ''
         this.setMovies(data)

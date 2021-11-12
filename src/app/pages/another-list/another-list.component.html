@@ -1,7 +1,9 @@
 <div class="container">
   <h1>List of movies</h1>
+
+  <label for="userEmail">User email:</label>
   <form class="search-form" (submit)="searchUserList()">
-    <input class="form-control" type="text" name="userId" [(ngModel)]="userId" placeholder="Enter user id" />
+    <input class="form-control" type="text" name="userEmail" [(ngModel)]="userEmail" placeholder="Enter user email" />
     <button class="primary-btn" type="submit">Get movies</button>
   </form>
 
@@ -11,7 +13,7 @@
       <option selected="selected" value="release_date,asc">Year: Low to High</option>
       <option value="release_date,desc">Year: High to Low</option>
       <option value="name">Title</option>
-      <option value="vote_average">Rating</option>
+      <option value="vote_average,desc">Rating</option>
       <option value="language">Language</option>
     </select>
   </div>
