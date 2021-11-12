@@ -23,9 +23,8 @@ export class MyListComponent implements OnInit {
 
   getMovies(order: any = 'release_date,asc') {
     this.loading = true
-    let headers = { Authorization: 'Bearer ' + localStorage.getItem('token') }
 
-    this.service.getMyList(order, this.page, headers).subscribe({
+    this.service.getMyList(order, this.page).subscribe({
       next: (data) => {
         this.setMovies(data)
         this.loading = false

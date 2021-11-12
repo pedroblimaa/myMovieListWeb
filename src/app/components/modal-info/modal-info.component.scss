@@ -1,12 +1,11 @@
 .modal-container {
   position: fixed;
   top: 0;
-  left: 0;
-  width: 100vw;
-  z-index: 9999;
+  left: 50%;
+  transform: translateX(-50%);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: auto;
+  z-index: 2;
   transition: 1s;
 }
 
