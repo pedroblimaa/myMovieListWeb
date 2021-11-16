@@ -36,6 +36,9 @@ export class AnotherListComponent {
         if (err.status === 404) {
           this.errorMessage = 'User not found'
         }
+        if(err.status === 403){
+          this.errorMessage = 'The list is private'
+        }
       },
     })
   }
