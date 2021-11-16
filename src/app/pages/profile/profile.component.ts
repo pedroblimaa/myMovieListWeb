@@ -40,8 +40,8 @@ export class ProfileComponent implements OnInit {
     this.privateListDisabled = true
 
 
-    this.service.setPrivateList(this.user.privateList).subscribe({
-      next: () => {
+    this.service.setPrivateList(this.privateList).subscribe({
+      next: (data) => {
         this.privateListDisabled = false
         this.user.privateList = this.privateList
         this.setModalInfo('Private list updated', 'success')
