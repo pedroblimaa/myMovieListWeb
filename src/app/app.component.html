@@ -1,6 +1,7 @@
 <header *ngIf="isLogged()">
   <a class="app-title" routerLink="">My Movie list</a>
   <div class="navigate-list">
+    <a *ngIf="isLogged()" routerLink="profile">Profile</a>
     <div class="dropdown">
       <a class="dropbtn">Movie List</a>
       <div class="dropdown-content">

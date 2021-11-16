@@ -1,0 +1,27 @@
+<div class="container">
+  <div class="profile">
+    <h1>Profile</h1>
+    <form class="profile-body" (submit)="setPrivateList()">
+      <div class="profile-field">
+        <label for="email">Email: </label>
+        <input class="form-control" type="email" id="email" name="email" value="{{ user.email }}" disabled />
+      </div>
+      <div class="profile-field">
+        <label for="name">Name: </label>
+        <input class="form-control" type="text" id="name" name="name" value="{{ user.name }}" disabled />
+      </div>
+      <div class="profile-field checkbox-field">
+        <label for="private">Private: </label>
+        <label class="switch">
+          <input  type="checkbox" id="private" name="private" [(ngModel)]="privateList" />
+          <span class="slider"></span>
+        </label>
+      </div>
+      <button type="submit" class="primary-btn">Save</button>
+    </form>
+  </div>
+  <app-modal-info
+    (closeModal)="modalInfo.visible = false"
+    [infoData]="{ message: modalInfo.message, visible: modalInfo.visible, type: modalInfo.type }"
+  ></app-modal-info>
+</div>
