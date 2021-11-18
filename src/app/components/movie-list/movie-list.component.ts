@@ -123,7 +123,7 @@ export class MovieListComponent {
       next: (data: any) => {
         this.setModalInfo('Rating updated successfully', 'success')
         this.movies = this.movies.map((movie) =>
-          movie.id == this.modalEditData.movieId ? { ...movie, vote_average: rating } : movie
+          movie.id == this.modalEditData.movieId ? { ...movie, vote_average: data.vote_average } : movie
         )
         console.log(data)
       },
