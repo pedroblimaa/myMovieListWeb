@@ -22,6 +22,12 @@ export class AuthService {
     })
   }
 
+  testAuth() {
+    return this.httpClient.get<any>('http://localhost:8081/user', {
+      headers: this.getHeader(),
+    })
+  }
+
   setPrivateList(privateList: any) {
     localStorage.setItem('privateList', JSON.stringify(privateList))
     return this.httpClient.patch<any>(
