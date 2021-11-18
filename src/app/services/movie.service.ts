@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Movie } from '../models/movie.module'
 import { MovieApi } from '../models/movie-api.module.ts.module'
+import { ThrowStmt } from '@angular/compiler'
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +37,14 @@ export class MovieService {
     return this.httpClient.get<MovieApi[]>('http://localhost:8081/movies?page=' + (page + 1) + titleQuery, {
       headers: header,
     })
+  }
+
+  getMoviePosterPath(id: string) {
+    return this.httpClient.get<any>(`http://api.themoviedb.org/3/movie/${id}/images?api_key=a14d836ba9872e3582094edabf7ff1b0`)
+  }
+
+  getMoviePoster(path: string) {
+    return this.httpClient.get<any>(`http://image.tmdb.org/t/p/w500${path}`)
   }
 
   addMovie(movieId: string | undefined): Observable<Movie> {

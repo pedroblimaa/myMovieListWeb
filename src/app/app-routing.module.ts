@@ -1,12 +1,13 @@
-import { ProfileComponent } from './pages/profile/profile.component';
-import { AddMovieComponent } from './pages/add-movie/add-movie.component';
-import { AnotherListComponent } from './pages/another-list/another-list.component';
+import { ProfileComponent } from './pages/profile/profile.component'
+import { AddMovieComponent } from './pages/add-movie/add-movie.component'
+import { AnotherListComponent } from './pages/another-list/another-list.component'
 import { MyListComponent } from './pages/my-list/my-list.component'
 import { GuardService } from './services/guard.service'
 import { HomeComponent } from './pages/home/home.component'
 import { NgModule } from '@angular/core'
 import { RouterModule, Routes } from '@angular/router'
 import { LoginComponent } from './pages/login/login.component'
+import { MovieDetailComponent } from './pages/movie-detail/movie-detail.component'
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -25,6 +26,12 @@ const routes: Routes = [
   {
     path: 'my-list/user',
     component: AnotherListComponent,
+    data: { requiresLogin: true },
+    canActivate: [GuardService],
+  },
+  {
+    path: 'movie',
+    component: MovieDetailComponent,
     data: { requiresLogin: true },
     canActivate: [GuardService],
   },

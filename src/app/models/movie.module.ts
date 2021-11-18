@@ -4,4 +4,5 @@ export interface Movie {
   release_date: string
   language: string
   vote_average: number
+  overview: string
 }

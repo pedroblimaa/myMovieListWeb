@@ -5,14 +5,14 @@
         <div *ngFor="let movie of movies" class="movie-card">
           <!-- implement images -->
           <div class="card-content">
-            <div *ngIf="type === 'add'" class="add-icon">
+            <div *ngIf="type === 'add'" class="add-icon icon">
               <fa-icon
                 class="card-icon"
                 [icon]="faPlusCircle"
                 (click)="openModal({ movieId: movie.id, add: true })"
               ></fa-icon>
             </div>
-            <div *ngIf="type === 'remove'" class="remove-icon">
+            <div *ngIf="type === 'remove'" class="remove-icon icon">
               <div>
                 <fa-icon
                   class="card-icon"
@@ -22,10 +22,13 @@
                 <fa-icon class="card-icon" [icon]="faEdit" (click)="openEditModal(movie.id)"></fa-icon>
               </div>
             </div>
-            <h2 class="movie-info">{{ movie.name }}</h2>
-            <p class="movie-info">Year: {{ movie.release_date }}</p>
-            <p class="movie-info">Language: {{ movie.language }}</p>
-            <p class="movie-info">Rating: {{ movie.vote_average }}</p>
+            <div class="info-container" [routerLink]="['/movie', movie]">
+              <h2 class="movie-info">{{ movie.name }}</h2>
+              <p class="movie-info">Year: {{ movie.release_date }}</p>
+              <p class="movie-info">Language: {{ movie.language }}</p>
+              <p class="movie-info">Rating: {{ movie.vote_average }}</p>
+            </div>
+            <div class="hover-effect"></div>
           </div>
         </div>
       </div>

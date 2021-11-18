@@ -44,6 +44,7 @@ export class AddMovieComponent {
             release_date: movie.release_date,
             language: movie.original_language,
             vote_average: movie.vote_average,
+            overview: movie.overview,
           }
         })
 

@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.testAuth().subscribe({
-      next: () => { console.log('test auth ok') },
+      next: () => {},
       error: (err: any) => {
         if (err.status === 403) {
           this.authService.logout()

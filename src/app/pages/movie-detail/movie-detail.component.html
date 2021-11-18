@@ -1,0 +1,23 @@
+<div class="container movie-container" *ngIf="!loading; else isLoading">
+  <div class="movie-header">
+    <h3>{{ movie.name }}</h3>
+  </div>
+  <div class="movie-body">
+    <div class="movie-poster">
+      <img src="{{ imageUrl }}" alt="{{ movie.name }}" onerror="this.src='../../../assets/no_image.png'" />
+      <ng-template #imgNotFound>
+        <p>Image not found</p>
+      </ng-template>
+    </div>
+    <div>
+      <p>{{ movie.overview }}</p>
+      <p><strong>Rating: </strong> {{ movie.vote_average }}</p>
+      <p><strong>Original Language: </strong> {{ movie.language }}</p>
+      <p><strong>Release Date: </strong> {{ movie.release_date | date }}</p>
+    </div>
+  </div>
+</div>
+
+<ng-template #isLoading>
+  <app-loader></app-loader>
+</ng-template>

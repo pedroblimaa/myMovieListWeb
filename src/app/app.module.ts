@@ -16,7 +16,8 @@ import { AddMovieComponent } from './pages/add-movie/add-movie.component'
 import { ModalComponent } from './components/modal/modal.component'
 import { InfoModalComponent } from './components/loader/info-modal/info-modal.component'
 import { ModalInfoComponent } from './components/modal-info/modal-info.component'
-import { ProfileComponent } from './pages/profile/profile.component'
+import { ProfileComponent } from './pages/profile/profile.component';
+import { MovieDetailComponent } from './pages/movie-detail/movie-detail.component'
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ProfileComponent } from './pages/profile/profile.component'
     InfoModalComponent,
     ModalInfoComponent,
     ProfileComponent,
+    MovieDetailComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule, FontAwesomeModule],
   providers: [],
