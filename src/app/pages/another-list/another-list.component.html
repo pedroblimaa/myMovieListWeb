@@ -20,7 +20,7 @@
 
   <div class="movies-container">
     <div *ngIf="errorMessage.length <= 0; else errorDiv"></div>
-    <app-movie-list (emitor)="changePage($event)" [movieData]="{dataContent, movies, loading}"></app-movie-list>
+    <app-movie-list (emitor)="changePage($event)" [movieData]="{dataContent, movies, loading, userEmail}"></app-movie-list>
   </div>
 
   <ng-template #errorDiv>

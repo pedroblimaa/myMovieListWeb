@@ -3,7 +3,6 @@
     <div *ngIf="!dataContent?.empty; else emptyList">
       <div class="list" *ngIf="!loading; else isLoading">
         <div *ngFor="let movie of movies" class="movie-card">
-          <!-- implement images -->
           <div class="card-content">
             <div *ngIf="type === 'add'" class="add-icon icon">
               <fa-icon
@@ -22,12 +21,14 @@
                 <fa-icon class="card-icon" [icon]="faEdit" (click)="openEditModal(movie.id)"></fa-icon>
               </div>
             </div>
-            <div class="info-container" [routerLink]="['/movie', movie]">
-              <h2 class="movie-info">{{ movie.name }}</h2>
-              <p class="movie-info">Year: {{ movie.release_date }}</p>
-              <p class="movie-info">Language: {{ movie.language }}</p>
-              <p class="movie-info">Rating: {{ movie.vote_average }}</p>
-            </div>
+            <a class="card-link" routerLink="/movie" (click)="movieDetail(movie, $event)">
+              <div class="info-container">
+                <h2 class="movie-info">{{ movie.name }}</h2>
+                <p class="movie-info">Year: {{ movie.release_date }}</p>
+                <p class="movie-info">Language: {{ movie.language }}</p>
+                <p class="movie-info">Rating: {{ movie.vote_average }}</p>
+              </div>
+            </a>
             <div class="hover-effect"></div>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MovieService } from './../../services/movie.service'
 import { Component } from '@angular/core'
 import { Movie } from 'src/app/models/movie.module'
@@ -14,8 +15,17 @@ export class AnotherListComponent {
   userEmail: string = ''
   errorMessage: string = ''
   page: number = 0
+  order: string = 'release_date,asc'
 
-  constructor(private service: MovieService) {}
+  constructor(private service: MovieService, private route: Router) {
+    const data = this.route.getCurrentNavigation()?.extras.state
+    if (data) {
+      this.userEmail = data['username']
+      this.page = data['page']
+      this.order = data['order']
+      this.searchUserList()
+    }
+  }
 
   changePage(event: { next: any }){
 
@@ -23,7 +33,8 @@ export class AnotherListComponent {
     this.searchUserList()
   }
 
-  searchUserList(order: any = 'release_date,asc'): void {
+  searchUserList(order: string = this.order): void {
+    this.order = order
     this.loading = true
 
     this.service.getListByUser(this.userEmail, order, this.page).subscribe({

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MovieService } from './../../services/movie.service'
 import { Component, OnInit, ViewChild } from '@angular/core'
 import { Movie } from 'src/app/models/movie.module'
@@ -13,8 +14,16 @@ export class MyListComponent implements OnInit {
   loading: boolean = true
   errorMessage: string = ''
   page: number = 0
+  order: string = 'release_date,asc'
 
-  constructor(private service: MovieService) {}
+  constructor(private service: MovieService, private route: Router) {
+    const data = this.route.getCurrentNavigation()?.extras.state
+    if (data) {
+      this.page = data['page']
+      this.order = data['order']
+      this.getMovies()
+    }
+  }
 
   changePage(event: { next: any }) {
     this.page = event.next ? this.page + 1 : this.page - 1
@@ -22,6 +31,7 @@ export class MyListComponent implements OnInit {
   }
 
   getMovies(order: any = 'release_date,asc') {
+    this.order = order
     this.loading = true
 
     this.service.getMyList(order, this.page).subscribe({

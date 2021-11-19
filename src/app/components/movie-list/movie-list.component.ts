@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router'
 import { MovieApi } from './../../models/movie-api.module.ts.module'
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core'
 import { Movie } from '../../models/movie.module'
@@ -23,7 +24,10 @@ export class MovieListComponent {
   type: string = ''
   page: number = 0
   pageTotal: boolean = true
-  modalData: any = {
+  movieName: string = ''
+  username: string = ''
+  order: string = ''
+    modalData: any = {
     visible: false,
     movieId: 0,
     add: false,
@@ -39,7 +43,14 @@ export class MovieListComponent {
     type: '',
   }
 
-  constructor(private service: MovieService) {}
+  constructor(private service: MovieService, private route: Router, private actRoute: ActivatedRoute) {
+    const data = this.route.getCurrentNavigation()?.extras.state
+    if (data) {
+      this.movieName = data['movieName']
+      this.page = data['page']
+      this.order = data['order']
+    }
+  }
 
   @Output() emitor = new EventEmitter<any>()
 
@@ -49,6 +60,30 @@ export class MovieListComponent {
     this.loading = model.loading
     this.type = model.type
     this.pageTotal = model.pageTotal ?? true
+    this.movieName = model.movieName ?? ''
+    this.username = model.userEmail ?? ''
+    this.order = model.order ?? ''
+  }
+
+  movieDetail(movie: any, event: any) {
+    const data = {
+      movie: movie,
+      pageUrl: this.route.url,
+      pageData: {
+        movieName: this.movieName,
+        page: this.page,
+        username: this.username,
+        order: this.order
+      },
+    }
+
+    localStorage.setItem('detailData', JSON.stringify(data))
+
+    if (event.ctrlKey) {
+      return
+    }
+
+    this.route.navigate(['/movie'])
   }
 
   objectIsEmpty(dataContent: any) {
@@ -69,7 +104,6 @@ export class MovieListComponent {
     this.service.addMovie(movieId).subscribe({
       next: (data: any) => {
         this.setModalInfo('Added successfully ', 'success')
-        console.log(data)
       },
       error: (err: any) => {
         console.log(err)
@@ -102,7 +136,6 @@ export class MovieListComponent {
   openEditModal(movieId: any) {
     this.modalEditData.visible = true
     this.modalEditData.movieId = movieId
-    console.log(movieId)
   }
 
   modalEvent({ doAction }: any) {
@@ -125,7 +158,6 @@ export class MovieListComponent {
         this.movies = this.movies.map((movie) =>
           movie.id == this.modalEditData.movieId ? { ...movie, vote_average: data.vote_average } : movie
         )
-        console.log(data)
       },
       error: (err: any) => {
         this.setModalInfo('Error updating rating', 'error')

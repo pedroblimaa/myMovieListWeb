@@ -2,6 +2,7 @@ import { MovieService } from './../../services/movie.service'
 import { Component, OnInit } from '@angular/core'
 import { MovieApi } from 'src/app/models/movie-api.module.ts.module'
 import { Movie } from 'src/app/models/movie.module'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-add-movie',
@@ -17,7 +18,14 @@ export class AddMovieComponent {
   loading: boolean = false
   page: number = 0
 
-  constructor(private service: MovieService) {}
+  constructor(private service: MovieService, private route: Router) {
+    const data = this.route.getCurrentNavigation()?.extras.state
+    if (data) {
+      this.movieName = data['movieName']
+      this.page = data['page']
+      this.searchMovies()
+    }
+  }
 
   changePage(event: any) {
     this.page = event.next ? this.page + 1 : this.page - 1

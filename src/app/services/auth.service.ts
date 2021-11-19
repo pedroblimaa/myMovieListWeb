@@ -29,7 +29,6 @@ export class AuthService {
   }
 
   setPrivateList(privateList: any) {
-    localStorage.setItem('privateList', JSON.stringify(privateList))
     return this.httpClient.patch<any>(
       'http://localhost:8081/movie-list/private-list',
       { privateList: privateList },

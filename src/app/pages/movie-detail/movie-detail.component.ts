@@ -1,6 +1,7 @@
 import { MovieService } from './../../services/movie.service'
 import { Component, OnInit } from '@angular/core'
-import { ActivatedRoute } from '@angular/router'
+import { Router } from '@angular/router'
+import { faArrowCircleLeft } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-movie-detail',
@@ -8,13 +9,29 @@ import { ActivatedRoute } from '@angular/router'
   styleUrls: ['./movie-detail.component.scss'],
 })
 export class MovieDetailComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private service: MovieService) {}
+  constructor(private service: MovieService, private route: Router) {}
+  detailData: any = {}
   movie: any = {}
   imageUrl: string = ''
   loading: any = true
+  pageData: any = {}
+  faArrowCircleLeft = faArrowCircleLeft
+
+  return() {
+    this.route.navigate([this.detailData.pageUrl], {
+      state: {
+        movieName: this.pageData.movieName,
+        username: this.pageData.username,
+        page: this.pageData.page,
+        order: this.pageData.order,
+      },
+    })
+  }
 
   ngOnInit() {
-    this.movie = this.route.snapshot.params
+    this.detailData = JSON.parse(localStorage.getItem('detailData') || '{}')
+    this.movie = this.detailData.movie
+    this.pageData = this.detailData.pageData
     this.service.getMoviePosterPath(this.movie.id).subscribe({
       next: (data) => {
         if (data.posters.length > 0) {

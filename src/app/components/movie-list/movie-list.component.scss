@@ -24,10 +24,7 @@ h2 {
   height: calc(100% + 20px);
   padding: 10px;
   transform: translate(-10px, -10px);
-
-  &:hover + .hover-effect {
-    box-shadow: 0px 0px 10px #ccc;
-  }
+  color: #fff;
 
   & h2 {
     display: -webkit-box;
@@ -38,6 +35,14 @@ h2 {
   }
 }
 
+.card-link:hover{
+  text-decoration: none;
+
+  &  + .hover-effect {
+    box-shadow: 0px 0px 10px #ccc;
+  }
+}
+
 .hover-effect {
   position: absolute;
   top: 0;
@@ -45,6 +50,7 @@ h2 {
   height: 100%;
   width: 100%;
   z-index: -1;
+  transition: 0.15s;
 }
 
 .movie-info {
