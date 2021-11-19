@@ -160,8 +160,14 @@ export class MovieListComponent {
         )
       },
       error: (err: any) => {
-        this.setModalInfo('Error updating rating', 'error')
         console.log(err)
+        if(err.status === 400) {
+          this.setModalInfo('Rating value must be between 0 and 10', 'error')
+          return
+        }
+
+        this.setModalInfo('Error updating rating', 'error')
+
       },
     })
   }
